@@ -14,16 +14,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@Deprecated
 class SpringCloudFunctionAwsApplicationTests {
-
 
     @Autowired
     private MockMvc mockMvc;
-
-//    @Test
-//    void contextLoads() {
-//    }
-
 
     @Test
     void reverseString() throws Exception {
