@@ -4,9 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import reactor.core.publisher.Flux;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -14,7 +13,7 @@ import java.util.function.Supplier;
 @Configuration
 public class FunctionConfiguration {
 
-    private Logger logger = LoggerFactory.getLogger(FunctionConfiguration.class);
+    private final Logger logger = LoggerFactory.getLogger(FunctionConfiguration.class);
 
 //    Map<String, String> headers = new HashMap<>();
 //            headers.put("X-Powered-By", "AWS Lambda & Serverless");
@@ -32,13 +31,12 @@ public class FunctionConfiguration {
 
     @Bean
     public Consumer<String> processMessage() {
-        return msg -> {
-            logger.info("message, '{}' received for processing.", msg);
-        };
+        return msg -> logger.info("message '{}' received for processing.", msg);
     }
 
-//    @Bean
-//    public Supplier<Flux<String>> words() {
-//        return () -> Flux.fromArray(new String[] {"foo", "bar"});
-//    }
+
+    @Bean
+    public Supplier<Flux<String>> words() {
+        return () -> Flux.fromArray(new String[] {"foo", "bar"});
+    }
 }
